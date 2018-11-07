@@ -5,13 +5,9 @@ Proposal
 Group members
 =============
 
-| Name        | UNI                                             |
-|-------------|-------------------------------------------------|
-| Xinyi Lin   | xl2836                                          |
-| Nov 21 - 25 | Decide problems we interested in                |
-| Nov 26 - 30 | Analyze data and visualize                      |
-| Dec 1 - 6   | Report, webpage, screencast and Peer assessment |
-| Dec 7 - 11  | Prepare discussion                              |
+| Name      | UNI    |
+|-----------|--------|
+| Xinyi Lin | xl2836 |
 
 Project title
 =============
