@@ -18,7 +18,7 @@ Mental health becomes critical concerns in the society. All participants in the 
 
 # Intended final products
 
-After few weeks work, we hope that we can get a will-built website which shows our anlysis of the dataset and conclusions. This website will including our data source and some pictures created from data which reflect results. We will also make a short video which explain how we get our data, how we anlyze it and what results we get.
+After few weeks work, we hope that we can get a well-built website which shows our analysis of the dataset and conclusions. This website will including our data source and some pictures created from data which reflect results. We will also make a short video which explain how we get our data, how we analyze it and what results we get.
 
 # Anticipated data source
 
