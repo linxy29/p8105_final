@@ -18,7 +18,13 @@ In this project, we want to apply what we learn in "Data Science I" to a dataset
 Intended final products
 =======================
 
-After few weeks work, we hope that we can get a well-built website which shows our analysis of the dataset and conclusions. This website will including our data source and some pictures created from data which reflect results. We will also make a short video which explain how we get our data, how we analyze it and what results we get.
+After few weeks work, we hope that we can get a well-built website which shows our analysis of the dataset and conclusions. This website will including our data source and some pictures created from data which reflect results.
+
+Frequency of mental health illness and attitudes towards mental health vary by geographic location
+
+Association of Family history and mental health illness or other predictors Attitudes toward mental health VS attitudes toward physical health consequence
+
+Do tech companies provide more or less Mental health Benefits compared to non-tech company?
 
 Anticipated data source
 =======================
