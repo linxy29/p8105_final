@@ -12,9 +12,9 @@ Factors Associated with Mental Health
 
 # Motivation
 
-1. Wh
+In this project, we want to apply what we learn in "Data Science I" to a dataset we interested in and get some useful and interesting results.
+Mental health becomes critical concerns in the society. All participants in the survey are mentally ill. We are interested in employees’ mental status in tech companies and non-tach companies. 
 
-In this project, we want to apply what we learn in "Data Science I" to a dataset we interested in and get some useful and interesting results. As a results, we can not only practice our skills of collecting data as well as analyzing data but also create something meaningful.
 
 # Intended final products
 
