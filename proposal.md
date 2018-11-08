@@ -5,9 +5,10 @@ Proposal
 Group members
 =============
 
-| Name      | UNI    |
-|-----------|--------|
-| Xinyi Lin | xl2836 |
+| Name        | UNI    |
+|-------------|--------|
+| Xinyi Lin   | xl2836 |
+| Xinlei Chen | xc2474 |
 
 Project title
 =============
