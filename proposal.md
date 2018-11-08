@@ -9,6 +9,7 @@ Group members
 |-------------|--------|
 | Xinyi Lin   | xl2836 |
 | Xinlei Chen | xc2474 |
+| Haokun Yuan | hy2580 |
 
 Project title
 =============
@@ -18,7 +19,7 @@ Factors Associated with Mental Health
 Motivation
 ==========
 
-In this project, we want to apply what we learn in "Data Science I" to a dataset we interested in and get some useful and interesting results. Mental health becomes critical concerns in the society. All participants in the survey are mentally ill. We are interested in employees’ mental status in tech companies and non-tach companies.
+In this project, we want to apply what we learnt in "Data Science I" to a dataset we interested in and get some useful and interesting results. Mental health becomes critical concerns in the society. All participants in the survey are mentally ill. We are interested in employees’ mental status in tech companies and non-tech companies.
 
 Intended final products
 =======================
