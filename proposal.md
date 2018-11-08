@@ -27,10 +27,12 @@ Motivation
 
 Mental health becomes critical concerns in the society. All participants in the survey are mentally ill. We are interested in employees’ mental health status and attitudes toward mental health illness in tech companies and non-tech companies.
 
+============= The purpose of this project is to apply the skills we learnt in “Data Science I” to access data in real world setting and preferably make some impact on a concerning public health issue. In this case, we choose to analyze the mental health data gathered from a online survey done by OSMI, and hope our report could promote workplace mental health awareness and be used as reference by job seeker while job haunting.
+
 Intended final products
 =======================
 
-After few weeks of work, we hope that we can get a well-built website which shows our analysis of the dataset and conclusions including but not limited to the following questions:
+After few weeks of work, we hope that we can get a well-built website which shows our analysis of the dataset and conclusions including but not limiting to the following questions:
 
 1.  Do mental health illness and attitudes towards mental health vary by geographic location.
 
