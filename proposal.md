@@ -9,6 +9,7 @@ Group members
 |-------------|--------|
 | Xinyi Lin   | xl2836 |
 | Xinlei Chen | xc2474 |
+| Siyan Chen  | sc4456 |
 
 Project title
 =============
@@ -18,16 +19,18 @@ Factors Associated with Mental Health
 Motivation
 ==========
 
-In this project, we want to apply what we learn in "Data Science I" to a dataset we interested in and get some useful and interesting results. Mental health becomes critical concerns in the society. All participants in the survey are mentally ill. We are interested in employees’ mental status in tech companies and non-tach companies.
+In this project, we want to apply what we learn in "Data Science I" to a dataset we interested in and get some useful and interesting results. Mental health becomes critical concerns in the society. All participants in the survey are mentally ill. We are interested in employees’ mental health status and attitudes toward mental health illness in tech companies and non-tach companies.
 
 Intended final products
 =======================
 
-After few weeks work, we hope that we can get a well-built website which shows our analysis of the dataset and conclusions. This website will including our data source and some pictures created from data which reflect results.
+After few weeks work, we hope that we can get a well-built website which shows our analysis of the dataset and conclusions.
 
 Frequency of mental health illness and attitudes towards mental health vary by geographic location
 
-Association of Family history and mental health illness or other predictors Attitudes toward mental health VS attitudes toward physical health consequence
+Association of Family history and mental health illness or other predictors
+
+Attitudes toward mental health VS attitudes toward physical health consequence
 
 Do tech companies provide more or less Mental health Benefits compared to non-tech company?
 
