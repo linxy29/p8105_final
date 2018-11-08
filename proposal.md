@@ -10,10 +10,7 @@ Group members
 | Xinyi Lin   | xl2836 |
 | Xinlei Chen | xc2474 |
 | Haokun Yuan | hy2580 |
-
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-
-======= Siyan Chen | sc4456 &gt;&gt;&gt;&gt;&gt;&gt;&gt; c5af16e4b85d848f6017438ce7d472725b14998d
+| Siyan Chen  | sc4456 |
 
 Project title
 =============
@@ -23,11 +20,7 @@ Factors Associated with Mental Health
 Motivation
 ==========
 
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD In this project, we want to apply what we learnt in "Data Science I" to a dataset we interested in and get some useful and interesting results. Mental health becomes critical concerns in the society. All participants in the survey are mentally ill. We are interested in employees’ mental status in tech companies and non-tech companies. ======= In this project, we want to apply what we learn in "Data Science I" to a dataset we interested in and get some useful and interesting results. &gt;&gt;&gt;&gt;&gt;&gt;&gt; c5af16e4b85d848f6017438ce7d472725b14998d
-
-Mental health becomes critical concerns in the society. All participants in the survey are mentally ill. We are interested in employees’ mental health status and attitudes toward mental health illness in tech companies and non-tech companies.
-
-============= The purpose of this project is to apply the skills we learnt in “Data Science I” to access data in real world setting and preferably make some impact on a concerning public health issue. In this case, we choose to analyze the mental health data gathered from a online survey done by OSMI, and hope our report could promote workplace mental health awareness and be used as reference by job seeker while job haunting.
+The purpose of this project is to apply the skills we learnt in “Data Science I” to access data in real world setting and preferably make some impact on a concerning public health issue. In this case, we choose to analyze the mental health data gathered from a online survey done by OSMI, and hope our report could promote workplace mental health awareness and be used as reference by job seeker while job haunting.
 
 Intended final products
 =======================
