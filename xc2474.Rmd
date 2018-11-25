@@ -1,0 +1,49 @@
+---
+title: "xc2474"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(knitr)
+```
+
+```{r}
+mental_data = read_csv("./data/mental_health_in_tech_2016.csv")
+```
+
+Rename column name
+
+```{r}
+colnames(mental_data)[1] <- "self_employed"
+colnames(mental_data)[3] <- "employer"
+colnames(mental_data)[4] <- "role"
+colnames(mental_data)[5] <- "healthcare"
+colnames(mental_data)[56] <- "age"
+colnames(mental_data)[57] <- "gender"
+colnames(mental_data)[58] <- "country_live"
+colnames(mental_data)[59] <- "state_live"
+colnames(mental_data)[60] <- "country_work"
+colnames(mental_data)[61] <- "state_work"
+```
+
+
+```{r}
+mental_data = mental_data %>%
+  filter(age > 18, age < 60)
+```
+
+
+```{r}
+male = mental_data %>%
+  filter((gender == "M") | (gender == "Male") | (gender == "male") | (gender == "Cis male") | (gender == "cis man") | (gender == "cisdude") | (gender == "Dude") | (gender == "Male (cis)") | (gender == "Male.") | (gender == "man") | (gender == "sex is male")) %>%
+  mutate(gender = "male")
+
+female = mental_data %>%
+  filter((gender == "AFAB") | (gender == "Cis female") | (gender == "Cis-woman") | (gender == "Cisgender Female") | (gender == "F") | (gender == "Female") | (gender == "fem") | (gender == "Female assigned at birth") | (gender == "female/woman") | (gender == "fm")| (gender == "Genderfluid (born female)") |  (gender == "Woman")) %>%
+  mutate(gender = "female")
+
+tidy_mental_data = bind_rows(male, female)
+```
+
