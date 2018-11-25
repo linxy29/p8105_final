@@ -4,3 +4,30 @@ author: "Xinyi Lin"
 date: "11/17/2018"
 output: html_document
 ---
+
+```{r}
+library(tidyverse)
+```
+
+# Import and tidy data
+
+First, we should have a roughly understanding about this data.
+
+```{r}
+mentalhealth_2014_df = read_csv("./data/mental_health_in_tech_2014.csv") 
+mentalhealth_2016_df = read_csv("./data/mental_health_in_tech_2016.csv") 
+```
+
+```{r}
+summary(as.factor(mentalhealth_2014_df$Country))
+```
+
+```{r}
+mentalhealth_2014_df = 
+  mentalhealth_2014_df %>% 
+  filter(Country == "United States") %>% 
+  select(- Country)
+
+summary(as.factor(mentalhealth_2014_df$tech_company))
+```
+
