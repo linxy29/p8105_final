@@ -179,22 +179,12 @@ mentalhealth_2016_tidied =
          gender = str_replace(gender, "^Malr$", "Male"),    #?
          gender = str_replace(gender, "^[Mm]an$", "Male"),
          #gender = str_replace(gender, "^man$", "Male"),
-         gender = str_replace(gender, "^male$", "Male"),)
+         gender = str_replace(gender, "^male$", "Male"))
 
 summary(as.factor(mentalhealth_2016_tidied$gender))
 summary(mentalhealth_2016_tidied$age)   # need filter 99 or not?
 ```
 
 
-```{r}
-mental_data_fit = mentalhealth_2016_tidied %>%
-  mutate(tech = ifelse(tech_company == 1|tech_role == 1, 1, 0)) %>%
-  filter(!is.na(num_employees) & !is.na(tech) & !is.na(family_history) & !is.na(mental_health_previous) & !is.na(age) & !is.na(gender) & !is.na(work_remotely) & !is.na(mental_health_now)) %>%
-  mutate(num_employees = as.factor(num_employees), tech_company = as.factor(tech_company), tech_role = as.factor(tech_role), family_history = as.factor(family_history), mental_health_previous = as.factor(mental_health_previous), gender = as.factor(gender), work_remotely = as.factor(work_remotely), mental_health_now = as.factor(mental_health_now)) %>%
-  select(mental_health_now, num_employees, tech, family_history, mental_health_previous, age, gender, work_remotely)
-
-glm(mental_health_now ~ ., data = mental_data_fit)
-
-```
 
 
