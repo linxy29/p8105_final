@@ -36,7 +36,7 @@ Variables name in this data set are questions, we change it to short words for e
 
 • Employer_help: Does your employer offer resources to learn more about mental health concerns and options for seeking help?
 
-• Enonymity: Is your anonymity protected if you choose to take advantage of mental health or substance abuse treatment resources provided by your employer?
+• Anonymity: Is your anonymity protected if you choose to take advantage of mental health or substance abuse treatment resources provided by your employer?
 
 • Medical_leave: If a mental health issue prompted you to request a medical leave from work, asking for that leave would be:
 
@@ -147,11 +147,7 @@ Variables name in this data set are questions, we change it to short words for e
 • Work_remotely: Do you work remotely?
 
 ```{r}
-<<<<<<< HEAD
-colnames(mentalhealth_2016_df) <- c("self_employed", "num_employees", "tech_company", "tech_role", "benefits", "care_options", "employer_discussion", "employer_help", "enonymity", "medical_leave", "mental_health_consequences", "physical_health_consequences", "coworkers_discussion", "supervisor_discussion", "mental_vs_physical", "obs_consequence", "medical_coverage", "help_resourcces", "whether_reveal_business_contacts", "reveal_concequences_business_contects", "whether_reveal_coworkers", "reveal_concequences_coworkers", "productivity_affect", "work_time_affected", "preemployers", "preemployers_benefits", "preemployers_care_options", "preemployers_discussion", "preemployer_help", "pre_anonymity", "pre_mental_health_consequences", "pre_physical_health_consequences", "pre_coworkers_discussion", "pre_supervisors_discussion", "pre_mental_vs_physical", "pre_obs_consequence", "physical_health_interview", "physical_health_interview_reason", "mental_health_interview", "mental_health_interview_reason", "career_influence", "coworkers_view", "friends_family_share", "unsupportive_badly_handled", "less_likely_reveal", "family_history", "mental_health_previous", "mental_health_now", "condition_diagnosed", "possible_condition", "professional_diagnosed", "condition_professional_diagnosed", "seek_treatment", "work_interferes_treated", "work_interferes_untreated", "age", "gender", "country_live", "territory_live", "country_work", "territory_work", "work_position_kind", "work_remotely")
-=======
-colnames(mentalhealth_2016_df) <- c("self_employed", "num_employees", "tech_company", "tech_role", "benefits", "care_options", "employer_discussion", "employer_help", "anonymity", "medical_leave", "mental_health_consequences", "phys_health_consequences", "coworkers_discussion", "supervisor_discussion", "mental_vs_physical", "obs_consequence", "medical_coverage", "help_resourcces", "whether_reveal_business_contacts", "reveal_concequences_business_contects", "whether_reveal_coworkers", "reveal_concequences_coworkers", "productivity_affect", "work_time_affected", "preemployers", "preemployers_benefits", "preemployers_care_options", "preemployers_discussion", "preemployer_help", "pre_anonymity", "pre_mental_health_consequences", "pre_phys_health_consequences", "pre_coworkers_discussion", "pre_supervisors_discussion", "pre_mental_vs_physical", "pre_obs_consequence", "physical_health_interview", "physical_health_interview_reason", "mental_health_interview", "mental_health_interview_reason", "career_influence", "coworkers_view", "friends_family_share", "unsupportive_badly_handled", "less_likely_reveal", "family_history", "mental_health_previous", "mental_health_now", "condition_diagnosed", "possible_condition", "professional_diagnosed", "condition_professional_diagnosed", "seek_treatment", "work_interferes_treated", "work_interferes_untreated", "age", "gender", "country_live", "territory_live", "country_work", "territory_work", "work_position_kind", "work_remotely")
->>>>>>> edffa9e2fe37967e4da0947704fc8401d36bb2c5
+colnames(mentalhealth_2016_df) <- c("self_employed", "num_employees", "tech_company", "tech_role", "benefits", "care_options", "employer_discussion", "employer_help", "anonymity", "medical_leave", "mental_health_consequences", "physical_health_consequences", "coworkers_discussion", "supervisor_discussion", "mental_vs_physical", "obs_consequence", "medical_coverage", "help_resourcces", "whether_reveal_business_contacts", "reveal_concequences_business_contects", "whether_reveal_coworkers", "reveal_concequences_coworkers", "productivity_affect", "work_time_affected", "preemployers", "preemployers_benefits", "preemployers_care_options", "preemployers_discussion", "preemployer_help", "pre_anonymity", "pre_mental_health_consequences", "pre_physical_health_consequences", "pre_coworkers_discussion", "pre_supervisors_discussion", "pre_mental_vs_physical", "pre_obs_consequence", "physical_health_interview", "physical_health_interview_reason", "mental_health_interview", "mental_health_interview_reason", "career_influence", "coworkers_view", "friends_family_share", "unsupportive_badly_handled", "less_likely_reveal", "family_history", "mental_health_previous", "mental_health_now", "condition_diagnosed", "possible_condition", "professional_diagnosed", "condition_professional_diagnosed", "seek_treatment", "work_interferes_treated", "work_interferes_untreated", "age", "gender", "country_live", "territory_live", "country_work", "territory_work", "work_position_kind", "work_remotely")
 ```
 
 ```{r}
@@ -208,4 +204,24 @@ mentalhealth_2016_tidied %>%
   geom_bar(aes(fill = mental_health_now))
 ```
 
+```{r}
+mental_data_fit = 
+  mentalhealth_2016_tidied %>%
+  mutate(tech = ifelse(tech_company == 1 | tech_role == 1, 1, 0)) %>%
+  filter(mental_health_now != "Maybe") %>% 
+  filter(gender == "Male" | gender == "Female") %>% 
+  filter(!is.na(num_employees) & !is.na(tech) & !is.na(family_history) & !is.na(mental_health_previous) & !is.na(age) & !is.na(gender) & !is.na(work_remotely) & !is.na(mental_health_now)) %>%
+  mutate(num_employees = as.factor(num_employees), 
+         tech_company = as.factor(tech_company), 
+         tech_role = as.factor(tech_role), 
+         family_history = as.factor(family_history), 
+         mental_health_previous = as.factor(mental_health_previous), 
+         gender = as.factor(gender), 
+         work_remotely = as.factor(work_remotely), 
+         mental_health_now = as.factor(mental_health_now)) %>%
+  select(mental_health_now, num_employees, tech, family_history, mental_health_previous, age, gender, work_remotely)
 
+glm_stats = glm(mental_health_now ~ ., data = mental_data_fit, family = binomial()) %>% 
+  broom::tidy()
+
+```
