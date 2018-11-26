@@ -8,4 +8,3 @@
 图
 1、用不同的颜色代表有没有mental health，以·mental_health_now`作为参照，在地图上显示
 2、用work_position代表地点
-3、
