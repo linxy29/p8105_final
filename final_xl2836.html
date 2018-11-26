@@ -130,12 +130,12 @@ $(document).ready(function () {
 
 
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
 ## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
 ## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
 ## ✔ readr   1.1.1     ✔ forcats 0.3.0</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <div id="import-and-tidy-data" class="section level1">
@@ -212,15 +212,15 @@ mentalhealth_2016_df = read_csv(&quot;./data/mental_health_in_tech_2016.csv&quot
 <p>• Condition_professional_diagnosedIf so, what condition(s) were you diagnosed with?</p>
 <p>• Seek_treatment: Have you ever sought treatment for a mental health issue from a mental health professional?</p>
 <p>• Work_interferes_treated: If you have a mental health issue, do you feel that it interferes with your work when being treated effectively?</p>
-<p>Work_interferes_untreated:If you have a mental health issue, do you feel that it interferes with your work when NOT being treated effectively?</p>
-<p>Age: What is your age?</p>
-<p>Gender: What is your gender?</p>
-<p>Country_live: What country do you live in?</p>
-<p>Territory_live: What US state or territory do you live in?</p>
-<p>Country_work: What country do you work in?</p>
-<p>Territory_work: What US state or territory do you work in?</p>
-<p>Work_position: Which of the following best describes your work position?</p>
-<p>Work_remotely: Do you work remotely?</p>
+<p>• Work_interferes_untreated:If you have a mental health issue, do you feel that it interferes with your work when NOT being treated effectively?</p>
+<p>• Age: What is your age?</p>
+<p>• Gender: What is your gender?</p>
+<p>• Country_live: What country do you live in?</p>
+<p>• Territory_live: What US state or territory do you live in?</p>
+<p>• Country_work: What country do you work in?</p>
+<p>• Territory_work: What US state or territory do you work in?</p>
+<p>• Work_position: Which of the following best describes your work position?</p>
+<p>• Work_remotely: Do you work remotely?</p>
 <pre class="r"><code>colnames(mentalhealth_2016_df) &lt;- c(&quot;self_employed&quot;, &quot;num_employees&quot;, &quot;tech_company&quot;, &quot;tech_role&quot;, &quot;benefits&quot;, &quot;care_options&quot;, &quot;employer_discussion&quot;, &quot;employer_help&quot;, &quot;enonymity&quot;, &quot;medical_leave&quot;, &quot;mental_health_consequences&quot;, &quot;phys_health_consequences&quot;, &quot;coworkers_discussion&quot;, &quot;supervisor_discussion&quot;, &quot;mental_vs_physical&quot;, &quot;obs_consequence&quot;, &quot;medical_coverage&quot;, &quot;help_resourcces&quot;, &quot;whether_reveal_business_contacts&quot;, &quot;reveal_concequences_business_contects&quot;, &quot;whether_reveal_coworkers&quot;, &quot;reveal_concequences_coworkers&quot;, &quot;productivity_affect&quot;, &quot;work_time_affected&quot;, &quot;preemployers&quot;, &quot;preemployers_benefits&quot;, &quot;preemployers_care_options&quot;, &quot;preemployers_discussion&quot;, &quot;preemployer_help&quot;, &quot;pre_anonymity&quot;, &quot;pre_mental_health_consequences&quot;, &quot;pre_phys_health_consequences&quot;, &quot;pre_coworkers_discussion&quot;, &quot;pre_supervisors_discussion&quot;, &quot;pre_mental_vs_physical&quot;, &quot;pre_obs_consequence&quot;, &quot;physical_health_interview&quot;, &quot;physical_health_interview_reason&quot;, &quot;mental_health_interview&quot;, &quot;mental_health_interview_reason&quot;, &quot;career_influence&quot;, &quot;coworkers_view&quot;, &quot;friends_family_share&quot;, &quot;unsupportive_badly_handled&quot;, &quot;less_likely_reveal&quot;, &quot;family_history&quot;, &quot;mental_health_previous&quot;, &quot;mental_health_now&quot;, &quot;condition_diagnosed&quot;, &quot;possible_condition&quot;, &quot;professional_diagnosed&quot;, &quot;condition_professional_diagnosed&quot;, &quot;seek_treatment&quot;, &quot;work_interferes_treated&quot;, &quot;work_interferes_untreated&quot;, &quot;age&quot;, &quot;gender&quot;, &quot;country_live&quot;, &quot;territory_live&quot;, &quot;country_work&quot;, &quot;territory_work&quot;, &quot;work_position_kind&quot;, &quot;work_remotely&quot;)</code></pre>
 <pre class="r"><code>summary(as.factor(mentalhealth_2016_df$gender))</code></pre>
 <pre><code>##                                                                                                                                                         AFAB 
@@ -404,14 +404,16 @@ mentalhealth_2016_df = read_csv(&quot;./data/mental_health_in_tech_2016.csv&quot
 <pre class="r"><code>mentalhealth_2016_tidied =
   mentalhealth_2016_df %&gt;% 
   filter(age &lt; 100) %&gt;% 
-  mutate(gender = str_replace(gender, &quot;^[Ww]oman$&quot;, &quot;Female&quot;),
+  mutate(gender = str_replace(gender, &quot;^[Ww]oman$&quot;, &quot;Female&quot;),     # female
          gender = str_replace(gender, &quot;^[Ff]$&quot;, &quot;Female&quot;),
          gender = str_replace(gender, &quot;^fem$&quot;, &quot;Female&quot;),
          gender = str_replace(gender, &quot;^female$&quot;, &quot;Female&quot;),
          gender = str_replace(gender, &quot;^female/woman$&quot;, &quot;Female&quot;),
          gender = str_replace(gender, &quot;^fm$&quot;, &quot;Female&quot;),
-         #gender = str_replace(gender, &quot;^m$&quot;, &quot;Male&quot;),
-         gender = str_replace(gender, &quot;^[Mm]$&quot;, &quot;Male&quot;),
+         gender = str_replace(gender, &quot;AFAB&quot;, &quot;Female&quot;),
+         #gender = str_replace(gender, &quot;AFAB&quot;, &quot;Female&quot;),
+
+         gender = str_replace(gender, &quot;^[Mm]$&quot;, &quot;Male&quot;),  # male
          gender = str_replace(gender, &quot;^mail$&quot;, &quot;Male&quot;),  #?
          gender = str_replace(gender, &quot;^MALE$&quot;, &quot;Male&quot;),
          gender = str_replace(gender, &quot;^Male.$&quot;, &quot;Male&quot;),
@@ -421,9 +423,7 @@ mentalhealth_2016_df = read_csv(&quot;./data/mental_health_in_tech_2016.csv&quot
          gender = str_replace(gender, &quot;^male$&quot;, &quot;Male&quot;),)
 
 summary(as.factor(mentalhealth_2016_tidied$gender))</code></pre>
-<pre><code>##                                                                                                                                                         AFAB 
-##                                                                                                                                                            1 
-##                                                                                                                                                      Agender 
+<pre><code>##                                                                                                                                                      Agender 
 ##                                                                                                                                                            2 
 ##                                                                                                                                                  Androgynous 
 ##                                                                                                                                                            1 
@@ -450,7 +450,7 @@ summary(as.factor(mentalhealth_2016_tidied$gender))</code></pre>
 ##                                                                                                                                                         Enby 
 ##                                                                                                                                                            1 
 ##                                                                                                                                                       Female 
-##                                                                                                                                                          332 
+##                                                                                                                                                          333 
 ##                                                                                                      Female (props for making this a freeform field, though) 
 ##                                                                                                                                                            1 
 ##                                                                                                                                     Female assigned at birth 
