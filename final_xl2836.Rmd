@@ -156,7 +156,7 @@ summary(as.factor(mentalhealth_2016_df$gender))
 summary(as.factor(mentalhealth_2016_df$country_work))
 summary(mentalhealth_2016_df$age)
 
-mentalhealth_2016_tidied %>% 
+mentalhealth_2016_df %>% 
   ggplot(aes(x = age)) +
   geom_density()
 ```
