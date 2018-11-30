@@ -1,0 +1,14 @@
+name: "Yay internet!"
+output_dir: "."
+navbar:
+  title: "Home"
+  right:
+    - icon: fas fa-chart-area fa-lg
+      href: code
+    - icon: fa-github fa-lg
+      href: http://github.com/<YOUR_GH_NAME>/
+    - icon: fas fa-video fa-lg
+      href: screencast
+
+output:
+  html_document

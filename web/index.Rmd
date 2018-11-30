@@ -1,0 +1,51 @@
+---
+title: "Factors Associated with Mental Health in Tech Companies"
+output:
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+---
+
+
+
+<i> Haokun Yuan, Siyan Chen, Xinlei Chen, Xinyi Lin </i> 
+
+<br></br>
+
+<img src="image/website-landing-page-banner-blue-1.jpg" style="width:100%">
+
+
+<br></br>
+
+### Motivation
+
+
+The purpose of this project is to apply the skills we learnt in “Data Science I” to access data in real world setting and preferably make some impact on a concerning public health issue. In this case, we choose to analyze the mental health data gathered from a online survey done by OSMI, and hope our report could promote workplace mental health awareness and be used as reference by job seeker while job haunting.
+
+<br></br>
+
+### Intended final products
+
+
+After few weeks of work, we hope that we can get a well-built website which shows our analysis of the dataset and conclusions including but not limiting to the following questions:
+
+1. Do mental health illness and attitudes towards mental health vary by geographic location.
+
+2. How stronge is the association between family history and mental health illness or other predictors
+
+3. Attitudes toward mental health VS attitudes toward physical health consequence
+
+4. Do tech companies provide more or less mental health benefits compared to non-tech company?
+
+<br></br>
+
+### Data Source
+
+
+The original dataset is from [Open Sourcing Mental Illness](https://osmihelp.org/research/)
+<br></br>
+<br></br>
+
+<p style="text-align:center;"><img src="image/osmi-logo-big.png" width="128" height="128"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <img src="image/logo.jpg" width="150" height="150"></p>
+
+
