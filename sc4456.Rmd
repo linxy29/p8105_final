@@ -7,6 +7,7 @@ output: github_document
 library(tidyverse)
 library(viridis)
 library(tidytext)
+
 ```
 
 ```{r}
@@ -55,8 +56,32 @@ df = mentalhealth_2016_df %>% select(ID, condition_diagnosed, seek_treatment) %>
 ```
 
 ```{r}
-
+ratios = df %>% 
+  group_by(condition_diagnosed, seek_treatment) %>% 
+  summarize(count = n()) %>%
+  filter(count >= 3) %>% 
+  mutate(seek_treatment = ifelse(seek_treatment == 1, "yes", "no")) %>% 
+  spread(seek_treatment, count, fill = 0) %>% janitor::clean_names() %>% 
+    mutate(
+    seek_treatment_odds = (yes + 1) / (sum(yes) + 1),
+    not_seek_treatment_odds = (no + 1) / (sum(no) + 1), 
+    log_OR = log(seek_treatment_odds / not_seek_treatment_odds)) %>% 
+  arrange(desc(log_OR))
+  
 ```
 
+```{r}
+ratios %>%
+  mutate(pos_log_OR = ifelse(log_OR > 0, "yes > no", "no > yes")) %>% 
+  group_by(pos_log_OR) %>%
+  top_n(15, abs(log_OR)) %>%
+  ungroup() %>%
+  mutate(word = fct_reorder(condition_diagnosed, log_OR)) %>%
+  ggplot(aes(word, log_OR, fill = pos_log_OR)) +
+  geom_col() +
+  coord_flip() +
+  ylab("log odds ratio (yes/no)") +
+  scale_fill_discrete(name = "")
+```
 
 
