@@ -193,15 +193,28 @@ mentalh_vs_physical =
   #filter(tech_company != 0 | tech_role != 0) 
   #select(num_employees, tech_company, tech_role, benefits, )
   select(contains("mental"), contains("physical")) %>% 
-  select(- contains("previous"))
+  select(-contains("previous"))
 
 
 ```
 
 ```{r}
 mentalhealth_2016_tidied %>% 
+  group_by(num_employees, mental_health_now) %>% 
+  summarise(n = n()) %>% 
+  spread(key = mental_health_now, value = n) %>% 
+  mutate(total = Maybe + No + Yes,
+         mentalhealth_now_precentage = Yes/total) 
+```
+
+
+```{r}
+mentalhealth_2016_tidied %>% 
+  filter(mental_health_now == "Yes" | mental_health_now == "No") %>% 
   ggplot(aes(x = num_employees)) +
   geom_bar(aes(fill = mental_health_now))
+  
+mentalhealth_2016_tidied
 ```
 
 ```{r}
@@ -224,4 +237,36 @@ mental_data_fit =
 glm_stats = glm(mental_health_now ~ ., data = mental_data_fit, family = binomial()) %>% 
   broom::tidy()
 
+glm_stats
 ```
+
+# add id and split disorder
+
+```{r}
+# add_id
+mentalhealth_2016_tidied$ID = seq.int(nrow(mentalhealth_2016_tidied))
+
+# split Mental health disorders(for example, one person has several kinds of MH disorders)
+df = 
+  mentalhealth_2016_tidied %>% 
+  select(country_work, territory_work, mental_health_now, condition_diagnosed) %>% 
+  mutate(condition_diagnosed = str_split(condition_diagnosed, "\\|")) %>% 
+  unnest(condition_diagnosed) 
+```
+
+```{r}
+other_condition_df =
+  df %>% 
+  group_by(condition_diagnosed) %>% 
+  summarise(n = n()) %>% arrange(desc(n)) %>% 
+  filter(n == 1)
+
+other_condition_l = other_condition_df$condition_diagnosed
+
+shinymap_df =
+  df %>% 
+  mutate(condition_diagnosed = ifelse(condition_diagnosed %in% other_condition_l, "other", condition_diagnosed))
+```
+
+
+
