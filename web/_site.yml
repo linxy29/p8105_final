@@ -3,11 +3,12 @@ output_dir: "."
 navbar:
   title: "Home"
   right:
-    - text: "About"
-      href: about.html
-    - icon: fa-envelope fa-lg
-      href: mailto:<you@youremail.com>
+    - icon: fas fa-chart-area fa-lg
+      href: code
     - icon: fa-github fa-lg
       href: http://github.com/<YOUR_GH_NAME>/
+    - icon: fas fa-video fa-lg
+      href: screencast
+
 output:
   html_document
