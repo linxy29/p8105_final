@@ -217,6 +217,8 @@ mentalhealth_2016_tidied %>%
 mentalhealth_2016_tidied
 ```
 
+## model building
+
 ```{r}
 mental_data_fit = 
   mentalhealth_2016_tidied %>%
@@ -234,11 +236,74 @@ mental_data_fit =
          mental_health_now = as.factor(mental_health_now)) %>%
   select(mental_health_now, num_employees, tech, family_history, mental_health_previous, age, gender, work_remotely)
 
-glm_stats = glm(mental_health_now ~ ., data = mental_data_fit, family = binomial()) %>% 
-  broom::tidy()
+#glm_stats = glm(mental_health_now ~ ., data = mental_data_fit, family = binomial()) 
 
-glm_stats
+#glm_stats
 ```
+
+## useing random forest
+
+```{r}
+library(randomForest)
+index <- sample(2,nrow(mental_data_fit),replace = TRUE,prob = c(0.7,0.3))
+traindata <- mental_data_fit[index == 1,]
+testdata <- mental_data_fit[index == 2,]
+```
+
+decide ntree
+
+```{r}
+set.seed(13)
+rf_ntree <- randomForest(mental_health_now ~.,data=traindata,ntree=300)
+plot(rf_ntree)
+```
+
+```{r}
+mentalhealth_rf <- randomForest(mental_health_now ~ ., data = traindata, ntree = 300, proximity = TRUE)
+
+mentalhealth_rf
+
+importance(mentalhealth_rf)
+```
+
+show random forest
+
+```{r}
+MDSplot(mentalhealth_rf, mental_data_fit$mental_health_now)
+```
+
+test model
+
+```{r}
+mentalhealth_pred <- predict(mentalhealth_rf,newdata = testdata)
+table(mentalhealth_pred,testdata$mental_health_now)
+
+plot(margin(mentalhealth_rf, testdata$mental_health_now))
+```
+
+## using conditional inference tree
+
+```{r}
+library(party)
+index <- sample(2,nrow(mental_data_fit),replace = TRUE,prob = c(0.7,0.3))
+traindata <- mental_data_fit[index == 1,]
+testdata <- mental_data_fit[index == 2,]
+```
+
+```{r}
+fitted_ctree <- ctree(mental_health_now ~ ., data = traindata)
+plot(fitted_ctree, main = "Conditional Inference Tree")
+
+ctree.pred <- predict(fitted_ctree, testdata, type = "response")
+ctree.perf <- table(testdata$mental_health_now, ctree.pred, 
+                    dnn = c("Actual", "Predicted"))
+ctree.perf
+```
+
+
+
+
+
 
 # add id and split disorder
 
@@ -268,5 +333,5 @@ shinymap_df =
   mutate(condition_diagnosed = ifelse(condition_diagnosed %in% other_condition_l, "other", condition_diagnosed))
 ```
 
-
+##
 
