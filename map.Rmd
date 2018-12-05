@@ -104,7 +104,8 @@ map_other = map_other %>%
   mutate(latitude = as.numeric(latitude),
          longitude = as.numeric(longitude))
 
-map_all = full_join(map_other,map_US)
+map_all = full_join(map_other,map_US) %>% 
+  filter(mental_health_now == "Yes")
 
 
 ```
@@ -114,13 +115,13 @@ Column {.sidebar}
 ```{r}
 
 condition_choice = map_all %>% distinct(condition_diagnosed) %>% pull()
-answer_choice = map_all %>% distinct(mental_health_now) %>% pull()
+country_choice = map_all %>% distinct(country_work) %>% pull()
 
 selectInput("condition_choice", label = h3("Select condition"),
             choices = condition_choice, selected = "Anxiety Disorder (Generalized, Social, Phobia, etc)")
-shiny::radioButtons("answer_choice", label = h3("Choose answer"),
-    choices = answer_choice, 
-    selected = "Yes")
+shiny::radioButtons("country_choice", label = h3("Choose Country"),
+    choices = country_choice, 
+    selected = "United States of America")
 
 
 ```
@@ -132,7 +133,7 @@ Column {data-width=650}
 ```{r}
 LeafletInput = reactive({map_all %>%
     filter(condition_diagnosed == input$condition_choice,
-           mental_health_now == input$answer_choice)
+           country_work == input$country_choice)
 })
 
 renderLeaflet({
