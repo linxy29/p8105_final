@@ -92,7 +92,7 @@ fitted_ctree <- ctree(mental_health_now ~ ., data = traindata)
 plot(fitted_ctree, main = "Conditional Inference Tree")
 ```
 
-Conditional inference tree is built based on information measures, so those which give more information about response are shown first. According to the result, family history has huge influence in mental health disorders followed by gender and number of employees in the working company in different branches.
+Conditional inference tree is built based on significant level, so those which give more information about response are shown first. According to the result, family history has huge influence in mental health disorders followed by gender and number of employees in the working company in different branches.
 
 Finally, we use test data to test model and sensitivity and specificity are shown below.
 
@@ -166,7 +166,7 @@ fitted_dtree <- rpart(formula = mental_health_now ~ ., data = traindata, method 
 rpart.plot(fitted_dtree)
 ```
 
-Decision inference tree is built based on significant level, so those which are more significant are shown first. According to the result, family history also has huge influence in mental health disorders and is followed by number of employees in the working company in different branches when experimental subject didn't know their family history.
+Decision inference tree is built based on information measures, so those which are more significant are shown first. According to the result, family history also has huge influence in mental health disorders and is followed by number of employees in the working company in different branches when experimental subject didn't know their family history.
 
 Finally, we use test data to test model and its sensitivity and specificity are shown below.
 
