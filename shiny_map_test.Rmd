@@ -118,6 +118,7 @@ Column {.sidebar}
 # get choice
 condition = map_all %>% distinct(condition_diagnosed) %>% pull()
 answer = map_all %>% distinct(mental_health_now) %>% pull()
+#answer = c("Yes", "No", "Maybe")
 
 # selectInput widget
 selectInput("condition_choice", label = h3("Select condition"),
@@ -125,8 +126,7 @@ selectInput("condition_choice", label = h3("Select condition"),
 
 # radioButtons widget
 radioButtons("answer_choice", label = h3("Choose answer"),
-    choices = answer, 
-    selected = "Yes")
+    choices = answer, selected = "No")
 ```
 
 Column {data-width=650}
@@ -135,14 +135,10 @@ Column {data-width=650}
 ### Chart A
 
 ```{r}
-
-
-
-
 LeafletInput = reactive({
   map_all %>%
-    filter(condition_diagnosed == input$condition_choice,
-           mental_health_now == input$answer_choice)
+    #filter(condition_diagnosed == input$condition_choice, mental_health_now == input$answer_choice)
+    filter(mental_health_now == input$answer_choice, condition_diagnosed == input$condition_choice)
 })
 
 renderLeaflet({
