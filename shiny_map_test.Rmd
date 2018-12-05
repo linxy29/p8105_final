@@ -110,6 +110,13 @@ map_other = map_other %>%
 map_all = full_join(map_other,map_US)
 ```
 
+```{r}
+head(map_all)
+
+str(map_all)
+```
+
+
 
 Column {.sidebar}
 -----------------------------------------------------------------------
