@@ -94,9 +94,10 @@ work_interferes
 ```{r}
 work_if = mentalhealth_2016_df %>% 
   select(ID, condition_diagnosed, work_interferes_treated, work_interferes_untreated) %>% 
-  mutate(condition_diagnosed = str_split(condition_diagnosed, "\\|")) %>% unnest(condition_diagnosed) %>%    filter(!is.na(condition_diagnosed)) %>% 
+  mutate(condition_diagnosed = str_split(condition_diagnosed, "\\|")) %>% unnest(condition_diagnosed) %>%    
+  filter(!is.na(condition_diagnosed)) %>% 
   mutate(work_interferes_treated = recode(work_interferes_treated ,"Not applicable to me" = 0, "Never" = 1, "Rarely" = 2, "Sometimes" = 3, "Often" = 4),
-         work_interferes_untreated = recode(work_interferes_treated ,"Not applicable to me" = 0, "Never" = 1, "Rarely" = 2, "Sometimes" = 3, "Often" = 4)) %>% gather(key = "treat_or_not", value ="work_interference",work_interferes_treated:work_interferes_untreated)
+        work_interferes_untreated = recode(work_interferes_untreated ,"Not applicable to me" = 0, "Never" = 1, "Rarely" = 2, "Sometimes" = 3, "Often" = 4)) %>% gather(key = "treat_or_not", value ="work_interference",work_interferes_treated:work_interferes_untreated)
 
 # work_interferes_untreated = as.numeric(work_interferes_untreated)) %>% 
 #  mutate(work_interferes_untreated = work_interferes_untreated*-1) %>% 
