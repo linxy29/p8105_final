@@ -51,7 +51,7 @@ g <- list(
 plot_geo(data_map, locationmode = 'USA-states', sizes = c(1, 250)) %>%
   add_markers(
     x = ~longitude, y = ~latitude, size = ~total, color = ~territory_work, hoverinfo = "text",
-    text = ~str_c("Yes:",data_map$yes_percentage)
+    text = ~str_c("Yes:",data_map$yes_percentage, "\nState:",data_map$territory_work )
   ) %>%
   layout(title = '2016 US mental health survey<br>(Click legend to toggle)', geo = g)
 
