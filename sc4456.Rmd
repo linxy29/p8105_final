@@ -88,3 +88,39 @@ ratios %>%
 ```
 
 
+work_interferes
+"Not applicable to me" = 0, "Never" = 1, "Rarely" = 2, "Sometimes" = 3, "Often" = 4
+
+```{r}
+work_if = mentalhealth_2016_df %>% 
+  select(ID, condition_diagnosed, work_interferes_treated, work_interferes_untreated) %>% 
+  mutate(condition_diagnosed = str_split(condition_diagnosed, "\\|")) %>% unnest(condition_diagnosed) %>%    filter(!is.na(condition_diagnosed)) %>% 
+  mutate(work_interferes_treated = recode(work_interferes_treated ,"Not applicable to me" = 0, "Never" = 1, "Rarely" = 2, "Sometimes" = 3, "Often" = 4),
+         work_interferes_untreated = recode(work_interferes_treated ,"Not applicable to me" = 0, "Never" = 1, "Rarely" = 2, "Sometimes" = 3, "Often" = 4)) %>% gather(key = "treat_or_not", value ="work_interference",work_interferes_treated:work_interferes_untreated)
+
+# work_interferes_untreated = as.numeric(work_interferes_untreated)) %>% 
+#  mutate(work_interferes_untreated = work_interferes_untreated*-1) %>% 
+#  gather(key = "treat_or_not", value ="work_interference",work_interferes_treated:work_interferes_untreated)
+
+
+
+common_disease = work_if %>%
+  group_by(condition_diagnosed) %>% 
+  summarise(count = n()) %>% 
+  mutate(condition_diagnosed = fct_reorder(condition_diagnosed, count)) %>% 
+  top_n(12, count) 
+
+### common disease: ggplot(aes(y =condition_diagnosed, x = count)) + geom_path()
+
+common_disease_list = common_disease$condition_diagnosed
+
+
+plot_1 = work_if %>% 
+  filter(condition_diagnosed %in% common_disease_list) %>% 
+  ggplot(aes(x = condition_diagnosed, y = work_interference)) + geom_violin() + facet_wrap(~treat_or_not) +
+  coord_flip() + labs(caption = "Set score for work interference of mental health disorder: Not applicable to me = 0, Never = 1, Rarely = 2, Sometimes = 3, Often = 4")
+plot_1
+
+ 
+```
+
