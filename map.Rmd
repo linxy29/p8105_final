@@ -118,7 +118,7 @@ answer_choice = map_all %>% distinct(mental_health_now) %>% pull()
 
 selectInput("condition_choice", label = h3("Select condition"),
             choices = condition_choice, selected = "Anxiety Disorder (Generalized, Social, Phobia, etc)")
-radioButtons("answer_choice", label = h3("Choose answer"),
+shiny::radioButtons("answer_choice", label = h3("Choose answer"),
     choices = answer_choice, 
     selected = "Yes")
 
@@ -136,8 +136,8 @@ LeafletInput = reactive({map_all %>%
 })
 
 renderLeaflet({
- LeafletInput %>% 
-    leaflet(data = map_all) %>%
+ LeafletInput() %>% 
+    leaflet() %>%
     addTiles() %>%
     addMarkers(lng = ~longitude,
              lat = ~latitude,

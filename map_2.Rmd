@@ -1,0 +1,77 @@
+---
+title: "map_2"
+author: "haokun yuan"
+date: "12/5/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(plotly)
+
+```
+
+```{r}
+mentalhealth_2016_df = read_csv("./data/mental_health_in_tech_2016.csv") 
+colnames(mentalhealth_2016_df) <- c("self_employed", "num_employees", "tech_company", "tech_role", "benefits", "care_options", "employer_discussion", "employer_help", "enonymity", "medical_leave", "mental_health_consequences", "phys_health_consequences", "coworkers_discussion", "supervisor_discussion", "mental_vs_physical", "obs_consequence", "medical_coverage", "help_resourcces", "whether_reveal_business_contacts", "reveal_concequences_business_contects", "whether_reveal_coworkers", "reveal_concequences_coworkers", "productivity_affect", "work_time_affected", "preemployers", "preemployers_benefits", "preemployers_care_options", "preemployers_discussion", "preemployer_help", "pre_anonymity", "pre_mental_health_consequences", "pre_phys_health_consequences", "pre_coworkers_discussion", "pre_supervisors_discussion", "pre_mental_vs_physical", "pre_obs_consequence", "physical_health_interview", "physical_health_interview_reason", "mental_health_interview", "mental_health_interview_reason", "career_influence", "coworkers_view", "friends_family_share", "unsupportive_badly_handled", "less_likely_reveal", "family_history", "mental_health_previous", "mental_health_now", "condition_diagnosed", "possible_condition", "professional_diagnosed", "condition_professional_diagnosed", "seek_treatment", "work_interferes_treated", "work_interferes_untreated", "age", "gender", "country_live", "territory_live", "country_work", "territory_work", "work_position_kind", "work_remotely")
+
+
+```
+
+```{r}
+data_territory = mentalhealth_2016_df %>%
+  select(mental_health_now, territory_work) %>% 
+  group_by(territory_work) %>% 
+  count(mental_health_now) %>% 
+  spread(key = mental_health_now, value = n) %>% 
+  janitor::clean_names() %>% 
+  replace_na(list(maybe = 0, no = 0, yes = 0)) %>% 
+  mutate(total = yes + no + maybe)
+
+state_geo = read_csv("./data/statelatlong.csv") %>% 
+  janitor::clean_names()
+
+data_map = merge(data_territory, state_geo, by.x = "territory_work", by.y = "city") %>% 
+  mutate(yes_percentage = yes/total)
+
+g <- list(
+  scope = 'usa',
+  projection = list(type = 'albers usa'),
+  showland = TRUE,
+  landcolor = toRGB("gray85"),
+  subunitwidth = 1,
+  countrywidth = 1,
+  subunitcolor = toRGB("white"),
+  countrycolor = toRGB("white")
+)
+
+plot_geo(data_map, locationmode = 'USA-states', sizes = c(1, 250)) %>%
+  add_markers(
+    x = ~longitude, y = ~latitude, size = ~total, color = ~territory_work, hoverinfo = "text",
+    text = ~str_c("Yes:",data_map$yes_percentage)
+  ) %>%
+  layout(title = '2016 US mental health survey<br>(Click legend to toggle)', geo = g)
+
+
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
