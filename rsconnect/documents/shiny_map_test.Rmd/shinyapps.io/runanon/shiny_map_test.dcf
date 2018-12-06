@@ -1,0 +1,10 @@
+name: shiny_map_test
+title:
+username:
+account: runanon
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 604123
+bundleId: 1741010
+url: https://runanon.shinyapps.io/shiny_map_test/
+when: 1543972502.78836
